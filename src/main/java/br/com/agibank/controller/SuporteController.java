@@ -17,4 +17,16 @@ public class SuporteController {
             suporteDAO.inserirAtendenteSuporte(id_chamado,id_funcionario);
         }
     }
+
+    public void listarChamados(){
+        suporteDAO.listarChamados();
+    }
+
+    public void listarChamadosPendentes(){
+        suporteDAO.listarChamadosPendentes();
+    }
+
+    public void listarChamadosAtendidos(){
+        suporteDAO.listarChamadosAtendidos();
+    }
 }

@@ -17,7 +17,7 @@ public class SuporteDAO {
             stmt.setString(2, descricao);
             stmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
             stmt.executeUpdate();
-            System.out.println("Teste realizado com sucesso");
+            System.out.println("Chamado cadastrado com sucesso");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -47,8 +47,67 @@ public class SuporteDAO {
         return null;
     }
 
+    public void listarChamados(){
+        String sql = "SELECT * FROM Suporte INNER JOIN Usuario ON Usuario.id_usuario = Suporte.id_usuario";
+
+        try (Connection conn = Conexao.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                System.out.print(rs.getString("Usuario.nome") + " ");
+                System.out.print(rs.getString("descricao") + " ");
+                System.out.print(rs.getInt("responsavel") + " ");
+                System.out.print(rs.getString("resolucao\n"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void listarChamadosAtendidos(){
+        String sql = "SELECT * FROM Suporte INNER JOIN Usuario ON Usuario.id_usuario = Suporte.id_usuario WHERE responsavel IS NOT NULL";
+
+        try (Connection conn = Conexao.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                System.out.print(rs.getInt("id_usuario") + " ");
+                System.out.print(rs.getString("descricao") + " ");
+                System.out.print(rs.getInt("responsavel") + " ");
+                System.out.print(rs.getString("resolucao\n"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void listarChamadosPendentes(){
+        String sql = "SELECT * FROM Suporte INNER JOIN Usuario ON Usuario.id_usuario = Suporte.id_usuario WHERE responsavel IS NULL";
+
+        try (Connection conn = Conexao.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                System.out.print(rs.getInt("id_usuario") + " ");
+                System.out.print(rs.getString("descricao") + " ");
+                System.out.print(rs.getString("resolucao\n"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void inserirAtendenteSuporte(int id_suporte, int id_funcionario){
-            String sql = "UPDATE Suporte SET responsavel = ? WHERE id_suporte = ?";
+        String sql = "UPDATE Suporte SET responsavel = ? WHERE id_suporte = ?";
 
         try (Connection conn = Conexao.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
