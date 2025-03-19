@@ -4,6 +4,7 @@ public class Agencia {
     private String rua;
     private int numero;
     private String complemento;
+    private String cidade;
 
     public String getComplemento() {
         return complemento;
@@ -29,10 +30,19 @@ public class Agencia {
         this.rua = rua;
     }
 
-    public Agencia(String rua, int numero, String complemento){
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public Agencia(String rua, int numero, String complemento,String cidade){
         this.rua = rua;
         this.numero = numero;
         this.complemento = complemento;
+        this.cidade = cidade;
     }
 
     public Agencia(){
