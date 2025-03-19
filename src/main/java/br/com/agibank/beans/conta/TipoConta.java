@@ -1,4 +1,4 @@
-package br.com.agibank.beans.tipoConta;
+package br.com.agibank.beans.conta;
 
 public class TipoConta {
 

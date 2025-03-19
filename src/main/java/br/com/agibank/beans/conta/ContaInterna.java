@@ -1,4 +1,4 @@
-package br.com.agibank.beans.contaInterna;
+package br.com.agibank.beans.conta;
 
 import java.util.Date;
 
