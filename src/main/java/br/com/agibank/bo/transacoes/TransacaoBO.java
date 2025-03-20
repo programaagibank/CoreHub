@@ -18,8 +18,6 @@ public class TransacaoBO {
         if(transacao.getValor() <= 0){
             throw new IllegalArgumentException("Valor da transação inválido.");
         }
-
-        transacaoDAO.criarTransacao(transacao);
         return transacaoDAO.criarTransacao(transacao);
     }
 
