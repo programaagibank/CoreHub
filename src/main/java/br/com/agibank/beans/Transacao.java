@@ -12,6 +12,23 @@ public class Transacao {
     public Transacao() {
     }
 
+    public Transacao(int idContaOrigem, int idContaDestino, double valor, int idTipoTransacao, boolean transferenciaExterna) {
+        this.idContaOrigem = idContaOrigem;
+        this.idContaDestino = idContaDestino;
+        this.valor = valor;
+        this.idTipoTransacao = idTipoTransacao;
+        this.transferenciaExterna = transferenciaExterna;
+    }
+
+    public Transacao(int idContaOrigem, int idContaDestino, double valor, String descricao, int idTipoTransacao, boolean transferenciaExterna) {
+        this.idContaOrigem = idContaOrigem;
+        this.idContaDestino = idContaDestino;
+        this.valor = valor;
+        this.descricao = descricao;
+        this.idTipoTransacao = idTipoTransacao;
+        this.transferenciaExterna = transferenciaExterna;
+    }
+
     public Transacao(int id, int idContaOrigem, int idContaDestino, double valor, int idTipoTransacao, boolean transferenciaExterna) {
         this.id = id;
         this.idContaOrigem = idContaOrigem;
