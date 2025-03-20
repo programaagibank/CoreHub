@@ -4,13 +4,15 @@ public class Beneficio {
 
     private int idBeneficio;
     private String classe;
-    private String beneficio;
+    private String descricao;
 
-    public Beneficio(int idBeneficio, String classe, String beneficio) {
+    public Beneficio(int idBeneficio, String classe, String descricao) {
         this.idBeneficio = idBeneficio;
         this.classe = classe;
-        this.beneficio = beneficio;
+        this.descricao = descricao;
     }
+
+    public Beneficio(){}
 
     public int getIdBeneficio() {
         return idBeneficio;
@@ -28,11 +30,20 @@ public class Beneficio {
         this.classe = classe;
     }
 
-    public String getBeneficio() {
-        return beneficio;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setBeneficio(String beneficio) {
-        this.beneficio = beneficio;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    @Override
+    public String toString() {
+        return "Beneficio{" +
+                "idBeneficio=" + idBeneficio +
+                ", classe='" + classe + '\'' +
+                ", descricao='" + descricao + '\'' +
+                '}';
     }
 }
