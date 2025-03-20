@@ -24,8 +24,8 @@ public class TransacaoDAO {
     public int criarTransacao(Transacao transacao) throws SQLException {
         final String sql = "INSERT INTO Transacao (id_conta_origem, id_conta_destino, valor, descricao, id_tipo_transacao, transferencia_externa) VALUES (?,?,?,?,?,?)";
         stmt = con.prepareStatement(sql);
-        stmt.setInt(1, transacao.getIdContaDestino());
-        stmt.setInt(2, transacao.getIdContaOrigem());
+        stmt.setInt(1, transacao.getIdContaOrigem());
+        stmt.setInt(2, transacao.getIdContaDestino());
         stmt.setDouble(3, transacao.getValor());
         stmt.setString(4, transacao.getDescricao());
         stmt.setInt(5, transacao.getIdTipoTransacao());
@@ -52,9 +52,10 @@ public class TransacaoDAO {
     }
 
     public int atualizarTransacao(int id, String descricao) throws SQLException {
-        final String sql = "UPDATE Transacao SET descricao = ? WHERE id = ?";
+        final String sql = "UPDATE Transacao SET descricao = ? WHERE id_transacao = ?";
         stmt = con.prepareStatement(sql);
-        stmt.setString(1,"descricao");
+        stmt.setString(1,descricao);
+        stmt.setInt(2, id);
         return stmt.executeUpdate();
     }
 
