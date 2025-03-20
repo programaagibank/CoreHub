@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 public class Usuario {
-    private int id;
+    private int id_usuario;
     private String nome;
     private String apelido;
     private String senha;
@@ -16,7 +16,7 @@ public class Usuario {
     private String complemento;
 
     public Usuario(int id, String nome, String apelido, String senha, String email, int telefone, LocalDate data_nascimento, String rua, int numero, String complemento) {
-        this.id = id;
+        this.id_usuario = id;
         this.nome = nome;
         this.apelido = apelido;
         this.senha = senha;
@@ -29,7 +29,7 @@ public class Usuario {
     }
 
     public Usuario(int id, String nome, String apelido, String senha, String email, int telefone, LocalDate data_nascimento, String rua, int numero) {
-        this.id = id;
+        this.id_usuario = id;
         this.nome = nome;
         this.apelido = apelido;
         this.senha = senha;
@@ -41,11 +41,11 @@ public class Usuario {
     }
 
     public int getId() {
-        return id;
+        return id_usuario;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.id_usuario = id;
     }
 
     public String getNome() {
