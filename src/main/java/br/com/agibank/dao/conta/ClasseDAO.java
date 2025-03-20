@@ -22,17 +22,18 @@ public class ClasseDAO {
         con.close();
     }
 
-    public int cadastrarClasse(Classe classe) throws SQLException {
-        final String sql = "INSERT INTO Classe (score, tipo_classe) VALUES (?,?)";
+    public int cadastrarClasse(int score, String tipoClasse) throws SQLException {
+
+        final String sql = "INSERT INTO Classe(score, tipo_classe) VALUES(?,?)";
 
         stmt = con.prepareStatement(sql);
-        stmt.setInt(1, classe.getScore());
-        stmt.setString(2, classe.getTipoClasse());
+        stmt.setInt(1, score);
+        stmt.setString(2, tipoClasse);
 
         return stmt.executeUpdate();
     }
 
-    public Classe buscarConta(int id) throws SQLException {
+    public String buscarClasse(int id) throws SQLException {
 
         final String sql = "SELECT * FROM Classe WHERE id_classe = ?";
 
@@ -42,17 +43,39 @@ public class ClasseDAO {
         stmt.setInt(1, id);
         rs = stmt.executeQuery();
 
-        if(rs != null){
+        if(rs.next()){
 
             classe.setIdClasse(rs.getInt("id_classe"));
             classe.setScore(rs.getInt("score"));
             classe.setTipoClasse(rs.getString("tipo_classe"));
 
-            return classe;
+            return classe.toString();
 
-        }
-        return classe;
+        }else return "Deu errado irmao";
+
     }
 
+    public int atualizarClasse(int score, String tipoClasse, int id) throws SQLException {
 
+        final String sql = "UPDATE Classe SET score = ?, tipo_classe = ? WHERE id_classe = ?";
+
+        stmt = con.prepareStatement(sql);
+
+        stmt.setInt(1, score);
+        stmt.setString(2, tipoClasse);
+        stmt.setInt(3, id);
+
+        return stmt.executeUpdate();
+    }
+
+    public int deletarClasse(int id) throws SQLException {
+
+        final String sql = "DELETE FROM Classe WHERE id_classe = ?";
+
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, id);
+
+        return stmt.executeUpdate();
+
+    }
 }

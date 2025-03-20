@@ -12,11 +12,7 @@ public class Classe {
         this.tipoClasse = tipoClasse;
     }
 
-    public Classe() {
-        this.idClasse = 0;
-        this.score = 0;
-        this.tipoClasse = "";
-    }
+    public Classe() {}
 
     public int getIdClasse() {
         return idClasse;
