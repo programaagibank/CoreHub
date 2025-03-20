@@ -50,4 +50,12 @@ public class UsuarioDAO {
         stmt.setInt(10, id_usuario);
         return stmt.executeUpdate();
     }
+
+    public void deletarUsuario(int id_usuario) throws SQLException {
+        final String sql = "DELETE FROM Usuario WHERE id_usuario = ?";
+        stmt = con.prepareStatement(sql);
+
+        stmt.setInt(1, id_usuario);
+        stmt.executeUpdate();
+    }
 }
