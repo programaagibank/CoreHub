@@ -1,6 +1,6 @@
 package br.com.agibank.dao.transacoes;
 
-import br.com.agibank.beans.TipoTransacao;
+import br.com.agibank.beans.transacoes.TipoTransacao;
 import br.com.agibank.dao.Conexao;
 
 import java.sql.Connection;

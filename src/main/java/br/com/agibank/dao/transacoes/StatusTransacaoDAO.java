@@ -1,7 +1,6 @@
 package br.com.agibank.dao.transacoes;
 
-import br.com.agibank.beans.StatusTransacao;
-import br.com.agibank.beans.Transacao;
+import br.com.agibank.beans.transacoes.StatusTransacao;
 import br.com.agibank.dao.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,11 +23,11 @@ public class StatusTransacaoDAO {
         con.close();
     }
 
-    public int criarStatusTransacao(Transacao transacao, String status) throws SQLException {
+    public int criarStatusTransacao(StatusTransacao statusTransacao) throws SQLException {
         final String sql = "INSERT INTO Status_Transacao (id_transacao, status, data) VALUES (?,?,?)";
         stmt = con.prepareStatement(sql);
-        stmt.setInt(1, transacao.getId());
-        stmt.setString(2, status);
+        stmt.setInt(1, statusTransacao.getIdTransacao());
+        stmt.setString(2, statusTransacao.getStatus());
         stmt.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
         return stmt.executeUpdate();
     }
