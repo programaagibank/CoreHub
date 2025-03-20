@@ -3,23 +3,45 @@ package br.com.agibank.controller;
 import br.com.agibank.beans.Agencia;
 import br.com.agibank.daos.AgenciaDAO;
 
+import java.sql.SQLException;
+
 public class AgenciaController {
     private AgenciaDAO AgenciaDAO = new AgenciaDAO();
 
-    public void adicionarAgencia(String rua, int numero, String complemento, String cidade){
-        Agencia agencia = new Agencia(rua,numero,complemento,cidade);
-        AgenciaDAO.inserirAgencia(rua,numero,complemento,cidade);
+    public AgenciaController() throws SQLException {
     }
 
-    public void deletarAgencia(int id_agencia){;
-        AgenciaDAO.deletarAgencia(id_agencia);
+    public void adicionarAgencia(String rua, int numero, String complemento, String cidade){
+        Agencia agencia = new Agencia(rua,numero,complemento,cidade);
+        try{
+            AgenciaDAO.inserirAgencia(rua,numero,complemento,cidade);
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    public void deletarAgencia(int id_agencia){
+        try{
+            AgenciaDAO.deletarAgencia(id_agencia);
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public void alterarEndereco(int id_agencia, String rua, int numero, String complemento, String cidade){
-        AgenciaDAO.alterarEndereco(id_agencia,rua,numero,complemento,cidade);
+        try{
+            AgenciaDAO.alterarEndereco(id_agencia,rua,numero,complemento,cidade);
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public void listarAgencias(){
-        AgenciaDAO.listarAgencias();
+        try{
+            AgenciaDAO.listarAgencias();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
     }
 }
