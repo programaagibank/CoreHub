@@ -1,21 +1,22 @@
 package br.com.agibank.beans;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Usuario {
-    private int usuario;
+    private int id;
     private String nome;
     private String apelido;
     private String senha;
     private String email;
     private int telefone;
-    private Date data_nascimento;
+    private LocalDate data_nascimento;
     private String rua;
     private int numero;
     private String complemento;
 
-    public Usuario(int usuario, String nome, String apelido, String senha, String email, int telefone, Date data_nascimento, String rua, int numero, String complemento) {
-        this.usuario = usuario;
+    public Usuario(int id, String nome, String apelido, String senha, String email, int telefone, LocalDate data_nascimento, String rua, int numero, String complemento) {
+        this.id = id;
         this.nome = nome;
         this.apelido = apelido;
         this.senha = senha;
@@ -27,24 +28,24 @@ public class Usuario {
         this.complemento = complemento;
     }
 
-    public Usuario(int numero, String rua, Date data_nascimento, int telefone, String email, String senha, String nome, String apelido, int usuario) {
-        this.numero = numero;
-        this.rua = rua;
-        this.data_nascimento = data_nascimento;
-        this.telefone = telefone;
-        this.email = email;
-        this.senha = senha;
+    public Usuario(int id, String nome, String apelido, String senha, String email, int telefone, LocalDate data_nascimento, String rua, int numero) {
+        this.id = id;
         this.nome = nome;
         this.apelido = apelido;
-        this.usuario = usuario;
+        this.senha = senha;
+        this.email = email;
+        this.telefone = telefone;
+        this.data_nascimento = data_nascimento;
+        this.rua = rua;
+        this.numero = numero;
     }
 
-    public int getUsuario() {
-        return usuario;
+    public int getId() {
+        return id;
     }
 
-    public void setUsuario(int usuario) {
-        this.usuario = usuario;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -63,44 +64,20 @@ public class Usuario {
         this.apelido = apelido;
     }
 
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getComplemento() {
-        return complemento;
-    }
-
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
-    }
-
-    public int getNumero() {
-        return numero;
-    }
-
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
-
-    public String getRua() {
-        return rua;
-    }
-
-    public void setRua(String rua) {
-        this.rua = rua;
-    }
-
-    public Date getData_nascimento() {
-        return data_nascimento;
-    }
-
-    public void setData_nascimento(Date data_nascimento) {
-        this.data_nascimento = data_nascimento;
     }
 
     public int getTelefone() {
@@ -111,11 +88,35 @@ public class Usuario {
         this.telefone = telefone;
     }
 
-    public String getSenha() {
-        return senha;
+    public LocalDate getData_nascimento() {
+        return data_nascimento;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setData_nascimento(LocalDate data_nascimento) {
+        this.data_nascimento = data_nascimento;
+    }
+
+    public String getRua() {
+        return rua;
+    }
+
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
     }
 }
