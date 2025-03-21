@@ -15,8 +15,8 @@ public class Usuario {
     private int numero;
     private String complemento;
 
-    public Usuario(int id, String nome, String apelido, String senha, String email, int telefone, LocalDate data_nascimento, String rua, int numero, String complemento) {
-        this.id_usuario = id;
+    public Usuario(int id_usuario, String nome, String apelido, String senha, String email, int telefone, LocalDate data_nascimento, String rua, int numero, String complemento) {
+        this.id_usuario = id_usuario;
         this.nome = nome;
         this.apelido = apelido;
         this.senha = senha;
@@ -28,8 +28,8 @@ public class Usuario {
         this.complemento = complemento;
     }
 
-    public Usuario(int id, String nome, String apelido, String senha, String email, int telefone, LocalDate data_nascimento, String rua, int numero) {
-        this.id_usuario = id;
+    public Usuario(int id_usuario, String nome, String apelido, String senha, String email, int telefone, LocalDate data_nascimento, String rua, int numero) {
+        this.id_usuario = id_usuario;
         this.nome = nome;
         this.apelido = apelido;
         this.senha = senha;
@@ -40,12 +40,16 @@ public class Usuario {
         this.numero = numero;
     }
 
-    public int getId() {
+    public Usuario() {
+
+    }
+
+    public int getId_Usuario() {
         return id_usuario;
     }
 
-    public void setId(int id) {
-        this.id_usuario = id;
+    public void setId(int id_usuario) {
+        this.id_usuario = id_usuario;
     }
 
     public String getNome() {
