@@ -3,6 +3,8 @@ package br.com.agibank;
 import br.com.agibank.dao.conta.ClasseDAO;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.Date;
 
 public class Main {
     public static void main(String[] args){
@@ -21,6 +23,6 @@ public class Main {
         }
 
 
-
+        LocalDate.parse("2005/10/05");
     }
 }

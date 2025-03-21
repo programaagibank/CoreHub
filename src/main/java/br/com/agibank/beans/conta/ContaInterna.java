@@ -28,6 +28,8 @@ public class ContaInterna {
         this.status = status;
     }
 
+    public ContaInterna(){}
+
     public int getIdContaInterna() {
         return idContaInterna;
     }
