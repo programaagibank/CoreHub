@@ -1,6 +1,6 @@
 package br.com.agibank;
 
-import br.com.agibank.dao.conta.ClasseDAO;
+import br.com.agibank.dao.conta.*;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -11,18 +11,23 @@ public class Main {
 
         //testes e mais testes
         try{
-            ClasseDAO classedao = new ClasseDAO();
+            ContaInternaDAO contaInterna = new ContaInternaDAO();
+            ContaCorrenteDAO contaCorrente = new ContaCorrenteDAO();
+            ContaExternaDAO contaExterna = new ContaExternaDAO();
+            ContaSalarioDAO contaSalario = new ContaSalarioDAO();
+            ContaPoupancaDAO contaPoupanca = new ContaPoupancaDAO();
+            TipoContaDAO tipoConta = new TipoContaDAO();
 
-            classedao.deletarClasse(2);
 
-            String resultado = classedao.buscarClasse(2);
 
-            System.out.println(resultado);
+
+
+
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }
 
 
-        LocalDate.parse("2005/10/05");
+
     }
 }

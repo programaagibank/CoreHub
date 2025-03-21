@@ -12,7 +12,6 @@ import java.sql.Date;
 
 public class ContaSalarioDAO {
 
-
     private Connection con;
     private PreparedStatement stmt;
     private ResultSet rs;
@@ -25,7 +24,7 @@ public class ContaSalarioDAO {
         con.close();
     }
 
-    public int cadastrarContaPoupanca(int idConta, int cnpj, Date dataPagamento, double valorPagamento) throws SQLException {
+    public int cadastrarContaPoupanca(int idConta, int cnpj, String dataPagamento, double valorPagamento) throws SQLException {
 
         final String sql = "INSERT INTO Conta_Salario(id_conta, cnpj, data_pagamento, valor_pagamento) VALUES(?, ?, ?, ?)";
 
@@ -33,7 +32,7 @@ public class ContaSalarioDAO {
 
         stmt.setInt(1, idConta);
         stmt.setInt(2, cnpj);
-        stmt.setDate(3, dataPagamento);
+        stmt.setDate(3, java.sql.Date.valueOf(dataPagamento));
         stmt.setDouble(4, valorPagamento);
 
         return stmt.executeUpdate();
@@ -63,7 +62,7 @@ public class ContaSalarioDAO {
 
     }
 
-    public int atualizarContaSalario(int idConta, int cnpj, Date dataPagamento, double valorPagamento, int idContaSalario) throws SQLException {
+    public int atualizarContaSalario(int idConta, int cnpj, String dataPagamento, double valorPagamento, int idContaSalario) throws SQLException {
 
         final String sql = "UPDATE Conta_Salario SET id_conta = ?, cnpj = ?, data_pagamento = ?, valor_pagamento = ? WHERE id_conta_salario = ?";
 
@@ -71,7 +70,7 @@ public class ContaSalarioDAO {
 
         stmt.setInt(1, idConta);
         stmt.setInt(2, cnpj);
-        stmt.setDate(3, dataPagamento);
+        stmt.setDate(3, java.sql.Date.valueOf(dataPagamento));
         stmt.setDouble(4, valorPagamento);
         stmt.setInt(5, idContaSalario);
 

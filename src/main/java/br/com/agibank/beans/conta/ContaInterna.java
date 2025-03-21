@@ -5,7 +5,6 @@ import java.util.Date;
 public class ContaInterna {
 
     private int idContaInterna;
-    private int idListaConta;
     private int idUsuario;
     private int idTipo;
     private double idClasse;
@@ -15,9 +14,8 @@ public class ContaInterna {
     private Date dataAbertura;
     private String status;
 
-    public ContaInterna(int idContaInterna, int idListaConta, int idUsuario, int idTipo, double idClasse, int idAgencia, int numero, double saldo, Date dataAbertura, String status) {
+    public ContaInterna(int idContaInterna, int idUsuario, int idTipo, double idClasse, int idAgencia, int numero, double saldo, Date dataAbertura, String status) {
         this.idContaInterna = idContaInterna;
-        this.idListaConta = idListaConta;
         this.idUsuario = idUsuario;
         this.idTipo = idTipo;
         this.idClasse = idClasse;
@@ -36,14 +34,6 @@ public class ContaInterna {
 
     public void setIdContaInterna(int idContaInterna) {
         this.idContaInterna = idContaInterna;
-    }
-
-    public int getIdListaConta() {
-        return idListaConta;
-    }
-
-    public void setIdListaConta(int idListaConta) {
-        this.idListaConta = idListaConta;
     }
 
     public int getIdUsuario() {

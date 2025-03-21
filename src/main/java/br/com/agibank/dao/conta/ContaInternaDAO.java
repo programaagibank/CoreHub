@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Date;
+import java.util.Date;
 
 public class ContaInternaDAO {
 
@@ -23,25 +23,24 @@ public class ContaInternaDAO {
         con.close();
     }
 
-    public int cadastrarConta(ContaInterna conta) throws SQLException {
-        final String sql = "INSERT INTO ContaInterna (id_lista_contas, id_usuario, id_tipo, id_classe, id_classe, id_agencia, numero, saldo, data_abertura, status) VALUES (?,?,?,?,?,?,?,?,?)";
+    public int cadastrarConta(int idUsuario, int idTipo, double idClasse, int idAgencia, int numero, double saldo, String dataAbertura, String status) throws SQLException {
+        final String sql = "INSERT INTO Conta (id_usuario, id_tipo, id_classe, id_agencia, numero, saldo, data_abertura, status) VALUES (?,?,?,?,?,?,?,?)";
 
         stmt = con.prepareStatement(sql);
-        stmt.setInt(1, conta.getIdListaConta());
-        stmt.setInt(2, conta.getIdUsuario());
-        stmt.setInt(3, conta.getIdTipo());
-        stmt.setDouble(4, conta.getIdClasse());
-        stmt.setInt(5, conta.getIdAgencia());
-        stmt.setInt(6, conta.getNumero());
-        stmt.setDouble(7, conta.getSaldo());
-        stmt.setDate(8, conta.getDataAbertura());
-        stmt.setString(9, conta.getStatus());
+        stmt.setInt(1, idUsuario);
+        stmt.setInt(2, idTipo);
+        stmt.setDouble(3, idClasse);
+        stmt.setInt(4, idAgencia);
+        stmt.setInt(5, numero);
+        stmt.setDouble(6, saldo);
+        stmt.setDate(7, java.sql.Date.valueOf(dataAbertura));
+        stmt.setString(8, status);
 
         return stmt.executeUpdate();
     }
 
     public String buscarConta(int id) throws SQLException {
-        final String sql = "SELECT * FROM ContaInterna WHERE id_usuario = ?";
+        final String sql = "SELECT * FROM Conta WHERE id_usuario = ?";
 
         ContaInterna contaInterna = new ContaInterna();
 
@@ -67,14 +66,14 @@ public class ContaInternaDAO {
 
     }
 
-    public int atualizarConta(int numero, Double saldo, Date dataAbertura, String status) throws SQLException {
+    public int atualizarConta(int numero, Double saldo, String dataAbertura, String status) throws SQLException {
         final String sql = "UPDATE Conta SET numero = ?, saldo = ?, data_abertura = ?, status = ?  WHERE id_conta_interna = ?";
 
         stmt = con.prepareStatement(sql);
 
         stmt.setInt(1, numero);
         stmt.setDouble(2, saldo);
-        stmt.setDate(3, dataAbertura);
+        stmt.setDate(3, java.sql.Date.valueOf(dataAbertura));
         stmt.setString(4, status);
 
         return stmt.executeUpdate();
@@ -82,7 +81,7 @@ public class ContaInternaDAO {
     }
 
     public int deletarConta(int id) throws SQLException {
-        final String sql = "DELETE FROM ContaInterna(id_conta_interna) VALUES(?)";
+        final String sql = "DELETE FROM Conta(id_conta_interna) VALUES(?)";
 
         stmt = con.prepareStatement(sql);
 
