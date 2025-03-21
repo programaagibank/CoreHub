@@ -10,6 +10,8 @@ public class TipoConta {
         this.tipo = tipo;
     }
 
+    public TipoConta(){}
+
     public int getIdTipoConta() {
         return idTipoConta;
     }

@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Date;
 
 public class ContaInternaDAO {
 
@@ -39,39 +40,54 @@ public class ContaInternaDAO {
         return stmt.executeUpdate();
     }
 
-    public int buscarConta(ContaInterna conta) throws SQLException {
+    public String buscarConta(int id) throws SQLException {
         final String sql = "SELECT * FROM ContaInterna WHERE id_usuario = ?";
 
-        //ContaInterna contaInterna = new ContaInterna();
+        ContaInterna contaInterna = new ContaInterna();
 
         stmt = con.prepareStatement(sql);
-        stmt.setInt(1, conta.getIdContaInterna());
+        stmt.setInt(1, id);
+        rs = stmt.executeQuery();
 
-        return stmt.executeUpdate();
+        if(rs.next()){
 
-       // if(rs != null){
+            contaInterna.setIdContaInterna(rs.getInt("id_conta_interna"));
+            contaInterna.setIdUsuario(rs.getInt("id_usuario"));
+            contaInterna.setIdTipo(rs.getInt("id_tipo"));
+            contaInterna.setIdClasse(rs.getDouble("id_classe"));
+            contaInterna.setIdAgencia(rs.getInt("id_agencia"));
+            contaInterna.setNumero(rs.getInt("numero"));
+            contaInterna.setSaldo(rs.getDouble("saldo"));
+            contaInterna.setDataAbertura(rs.getDate("data_abertura"));
+            contaInterna.setStatus(rs.getString("status"));
 
-           // contaInterna.setNumero(rs.getInt("numero"));
+            return contaInterna.toString();
 
-        //}
+        }else return "Deu errado";
 
     }
 
-
-
-    public int deletarConta(ContaInterna conta) throws SQLException {
-        final String sql = "DELETE FROM ContaInterna (id_conta_interna) VALUES (?)";
+    public int atualizarConta(int numero, Double saldo, Date dataAbertura, String status) throws SQLException {
+        final String sql = "UPDATE Conta SET numero = ?, saldo = ?, data_abertura = ?, status = ?  WHERE id_conta_interna = ?";
 
         stmt = con.prepareStatement(sql);
 
-        stmt.setInt(1, conta.getIdContaInterna());
+        stmt.setInt(1, numero);
+        stmt.setDouble(2, saldo);
+        stmt.setDate(3, dataAbertura);
+        stmt.setString(4, status);
+
+        return stmt.executeUpdate();
+
+    }
+
+    public int deletarConta(int id) throws SQLException {
+        final String sql = "DELETE FROM ContaInterna(id_conta_interna) VALUES(?)";
+
+        stmt = con.prepareStatement(sql);
+
+        stmt.setInt(1, id);
 
         return stmt.executeUpdate();
     }
-
-
-
-
-
 }
-
