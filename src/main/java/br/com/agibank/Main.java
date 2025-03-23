@@ -1,5 +1,7 @@
 package br.com.agibank;
+import br.com.agibank.beans.Cliente;
 import br.com.agibank.beans.Funcionario;
+import br.com.agibank.dao.ClienteDAO;
 import br.com.agibank.dao.FuncionarioDAO;
 
 import java.sql.Connection;
@@ -13,9 +15,15 @@ public class Main {
 //            UsuarioDAO usuarioDAO = new UsuarioDAO();
 //            usuarioDAO.criarUsuario(usuario);
 
-            Funcionario funcionario = new Funcionario(1, 10, "Aendente");
-            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-            funcionarioDAO.criarFuncionario(funcionario);
+//            Funcionario funcionario = new Funcionario(1, 10, "Aendente");
+//            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+//            funcionarioDAO.criarFuncionario(funcionario);
+
+            Cliente cliente = new Cliente(1, 10);
+            ClienteDAO clienteDAO = new ClienteDAO();
+            clienteDAO.criarCliente(cliente);
+
+
             // Instanciando a classe FuncionarioDAO
 
 
