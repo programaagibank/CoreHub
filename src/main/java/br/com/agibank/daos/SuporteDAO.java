@@ -4,6 +4,7 @@ import br.com.agibank.beans.Conexao;
 import br.com.agibank.beans.Suporte;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class SuporteDAO {
 
@@ -54,6 +55,26 @@ public class SuporteDAO {
         return null;
     }
 
+    public ArrayList<Suporte> buscarChamadoPorIdUsuario(int id_usuario) throws SQLException{
+        String sql = "SELECT descricao, resolucao FROM Suporte WHERE id_usuario = ?";
+
+        PreparedStatement stmt = con.prepareStatement(sql);
+
+        stmt.setInt(1, id_usuario);
+        ResultSet rs = stmt.executeQuery();
+
+        ArrayList<Suporte> suportes = new ArrayList<>();
+
+        while (rs.next()) {
+            Suporte suporte = new Suporte();
+            suporte.setDescricao(rs.getString("descricao"));
+            suporte.setResolucao(rs.getString("resolucao"));
+            suportes.add(suporte);
+        }
+
+        return suportes;
+    }
+
     public void listarChamados() throws SQLException{
         String sql = "SELECT * FROM Suporte INNER JOIN Usuario ON Usuario.id_usuario = Suporte.id_usuario";
 
@@ -79,7 +100,7 @@ public class SuporteDAO {
             System.out.print(rs.getInt("id_usuario") + " ");
             System.out.print(rs.getString("descricao") + " ");
             System.out.print(rs.getInt("responsavel") + " ");
-            System.out.print(rs.getString("resolucao\n"));
+            System.out.print(rs.getString("resolucao") + "\n");
         }
     }
 
@@ -90,9 +111,8 @@ public class SuporteDAO {
         ResultSet rs = stmt.executeQuery();
 
         while (rs.next()) {
-            System.out.print(rs.getInt("id_usuario") + " ");
-            System.out.print(rs.getString("descricao") + " ");
-            System.out.print(rs.getString("resolucao\n"));
+            System.out.print(rs.getInt("id_suporte") + " ");
+            System.out.print(rs.getString("descricao") + "\n");
         }
 
     }
@@ -103,8 +123,37 @@ public class SuporteDAO {
         PreparedStatement stmt = con.prepareStatement(sql);
 
         stmt.setInt(1, id_funcionario);
-        stmt.setInt(2, id_suporte);;
+        stmt.setInt(2, id_suporte);
         stmt.executeUpdate();
-        System.out.println("Teste realizado com sucesso");
+    }
+
+    public void resolverChamado(int id_suporte, String resolucao) throws SQLException{
+        String sql = "UPDATE Suporte SET resolucao = ?, data_fechamento = ? WHERE id_suporte = ?";
+
+        PreparedStatement stmt = con.prepareStatement(sql);
+
+        stmt.setString(1, resolucao);
+        stmt.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+        stmt.setInt(3, id_suporte);
+
+        stmt.executeUpdate();
+    }
+
+    public Suporte verificarAtendenteChamado(int id_chamado, int id_usuario) throws SQLException{
+        String sql = "SELECT descricao FROM Suporte WHERE responsavel = ? and id_suporte = ?";
+
+        PreparedStatement stmt = con.prepareStatement(sql);
+
+        stmt.setInt(1, id_usuario);
+        stmt.setInt(2, id_chamado);
+        ResultSet rs = stmt.executeQuery();
+
+        if (rs.next()) {
+            Suporte suporte = new Suporte();
+            suporte.setDescricao(rs.getString("descricao"));
+            return suporte;
+        }
+
+        return null;
     }
 }

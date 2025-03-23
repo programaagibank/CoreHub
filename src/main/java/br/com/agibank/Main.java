@@ -40,5 +40,7 @@ public class Main {
         //suporte.listarChamadosAtendidos();
         //agencia.alterarEndereco(1,"nova rua", 2,"novo complemento","nova cidade");
         agencia.listarAgencias();
+        //suporte.listarChamados();
+
     }
 }
