@@ -1,8 +1,10 @@
 package br.com.agibank.controller;
+import br.com.agibank.beans.Usuario;
 import br.com.agibank.daos.SuporteDAO;
 import br.com.agibank.beans.Suporte;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class SuporteController {
     private final SuporteDAO suporteDAO = new SuporteDAO();
@@ -30,6 +32,29 @@ public class SuporteController {
         }
 
         return suporte;
+    }
+
+    public ArrayList<Suporte> buscarChamadosIdUsuario(int id_usuario){
+        ArrayList<Suporte> suportes = new ArrayList<>();
+        try {
+            suportes = suporteDAO.buscarChamadoPorIdUsuario(id_usuario);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return suportes;
+    }
+
+    public void exibirChamadosPorUsuario(int id_usuario){
+        ArrayList<Suporte> suportes = buscarChamadosIdUsuario(id_usuario);
+
+        for (Suporte suporte : suportes) {
+            System.out.print(suporte.getDescricao() + " || ");
+
+            if (suporte.getResolucao() != null) System.out.println(suporte.getResolucao());
+            else System.out.println("Aguardando resposta");
+        }
+
     }
 
     public void atenderChamado(int id_chamado, int id_funcionario){
@@ -68,5 +93,26 @@ public class SuporteController {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public boolean verificarAutoriaChamado(int id_chamado, int id_usuario){
+        Suporte suporte = new Suporte();
+        try{
+            suporte = suporteDAO.verificarAtendenteChamado(id_chamado,id_usuario);
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+
+        return suporte != null;
+    }
+
+    public void resolverChamado(int id_suporte, String resolucao, int id_usuario){
+        if(verificarAutoriaChamado(id_suporte,id_usuario)) {
+            try{
+                suporteDAO.resolverChamado(id_suporte,resolucao);
+            }catch (SQLException e){
+                System.out.println(e.getMessage());
+            }
+        }else System.out.println("Esse chamado não está sobre sua autoria!");
     }
 }
