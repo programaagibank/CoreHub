@@ -1,11 +1,13 @@
 package br.com.agibank.dao;
 
+import br.com.agibank.Conexao;
+import br.com.agibank.Main;
 import br.com.agibank.beans.Funcionario;
 import br.com.agibank.beans.Usuario;
 
 import java.sql.*;
 
-public class FuncionarioDAO extends UsuarioDAO{
+public class FuncionarioDAO{
     private Connection con;
     private PreparedStatement stmt;
     private ResultSet rs;
@@ -31,21 +33,28 @@ public class FuncionarioDAO extends UsuarioDAO{
         return id;
     }
 
-    @Override
-    public int criarUsuario(Usuario usuario) throws SQLException {
-        Funcionario funcionario = (Funcionario) usuario;
-        int id_usuario = pegarIDUsuario(usuario);
-        int resultadoUsuario = super.criarUsuario(usuario);
+//    public int criarFuncionario(Funcionario funcionario) throws SQLException {
+//        Usuario usuario = new Usuario();
+//        int id_usuario = pegarIDUsuario(usuario);
+//
+//        if (id_usuario > 0) {
+//            final String sql = "INSERT INTO Funcionario(id_usuario,funcao) VALUES(?,?)";
+//            stmt = con.prepareStatement(sql);
+//
+//            stmt.setInt(1,id_usuario);
+//            stmt.setString(2, funcionario.getFuncao());
+//
+//
+//        }
+//        return stmt.executeUpdate();
+//    }
 
-        if (resultadoUsuario > 0) {
-            final String sql = "INSERT INTO Funcionario(id_usuario,funcao) VALUES(?,?)";
-            stmt = con.prepareStatement(sql);
+    public int criarFuncionario(Funcionario funcionario) throws SQLException {
+        final String sql = "INSERT INTO Funcionario(id_usuario,funcao) VALUES(?,?)";
+        stmt = con.prepareStatement(sql);
 
-            stmt.setInt(1,id_usuario);
-            stmt.setString(2, funcionario.getFuncao());
-
-
-        }
+        stmt.setInt(1,funcionario.getId_usuario());
+        stmt.setString(2, funcionario.getFuncao());
         return stmt.executeUpdate();
     }
 

@@ -1,5 +1,7 @@
 package br.com.agibank.dao;
 
+import br.com.agibank.Conexao;
+import br.com.agibank.Main;
 import br.com.agibank.beans.Usuario;
 
 import java.sql.*;

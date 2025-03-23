@@ -2,23 +2,15 @@ package br.com.agibank.beans;
 
 import java.time.LocalDate;
 
-public class Funcionario extends Usuario{
+public class Funcionario {
     private int id_funcionario;
+    private int id_usuario;
     private String funcao;
 
-    public Funcionario(int id_funcionario, int id_usuario, String funcao, String nome, String apelido, String senha, String email, int telefone, LocalDate data_nascimento, String rua, int numero, String complemento) {
-        super(id_usuario,nome, apelido, senha, email, telefone, data_nascimento, rua, numero, complemento);
+    public Funcionario(int id_funcionario, int id_usuario, String funcao) {
         this.id_funcionario = id_funcionario;
+        this.id_usuario = id_usuario;
         this.funcao = funcao;
-    }
-
-    public Funcionario(int id_usuario, String nome, String apelido, String senha, String email, int telefone, LocalDate data_nascimento, String rua, int numero, String complemento) {
-        super(id_usuario,nome, apelido, senha, email, telefone, data_nascimento, rua, numero, complemento);
-
-    }
-
-    public Funcionario() {
-        super();
     }
 
     public int getId_funcionario() {
@@ -27,6 +19,14 @@ public class Funcionario extends Usuario{
 
     public void setId_funcionario(int id_funcionario) {
         this.id_funcionario = id_funcionario;
+    }
+
+    public int getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(int id_usuario) {
+        this.id_usuario = id_usuario;
     }
 
     public String getFuncao() {

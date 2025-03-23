@@ -1,22 +1,21 @@
 package br.com.agibank;
 import br.com.agibank.beans.Funcionario;
-import br.com.agibank.beans.Usuario;
 import br.com.agibank.dao.FuncionarioDAO;
-import br.com.agibank.dao.UsuarioDAO;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
         try{
-            Usuario usuario = new Usuario(1, "Heitor", "HTR", "1234", "heitor@teste.com", 1198759345, LocalDate.of(1985, 8, 20), "Rua Um", 45, "casa 2");
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
-            usuarioDAO.criarUsuario(usuario);
+//            Usuario usuario = new Usuario(1, "Heitor", "HTR", "1234", "heitor@teste.com", 1198759345, LocalDate.of(1985, 8, 20), "Rua Um", 45, "casa 2");
+//            UsuarioDAO usuarioDAO = new UsuarioDAO();
+//            usuarioDAO.criarUsuario(usuario);
 
-//            Funcionario funcionario = new Funcionario(1, 5, "Aendente");
-//            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-//            funcionarioDAO.criarUsuario(1);
+            Funcionario funcionario = new Funcionario(1, 10, "Aendente");
+            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+            funcionarioDAO.criarFuncionario(funcionario);
             // Instanciando a classe FuncionarioDAO
 
 
@@ -40,9 +39,16 @@ public class Main {
 //            usiario.setApelido("HTR");
 //            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 //            System.out.println( funcionarioDAO.pegarIDUsuario(usiario));
+
+//            Funcionario funcionario = new Funcionario(12, "Analista");
+//            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+//            funcionarioDAO.criarFuncionario(funcionario);
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 
     }
+
+
 }
