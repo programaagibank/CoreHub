@@ -74,7 +74,4 @@ public class TaxaDAO {
 
         return stmt.executeUpdate();
     }
-
-    public void setId(int i) {
-    }
 }
