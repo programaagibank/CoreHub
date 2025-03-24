@@ -1,8 +1,10 @@
 package br.com.agibank;
 import br.com.agibank.beans.Cliente;
 import br.com.agibank.beans.Funcionario;
+import br.com.agibank.beans.Usuario;
 import br.com.agibank.dao.ClienteDAO;
 import br.com.agibank.dao.FuncionarioDAO;
+import br.com.agibank.dao.UsuarioDAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,9 +21,9 @@ public class Main {
 //            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 //            funcionarioDAO.criarFuncionario(funcionario);
 
-            Cliente cliente = new Cliente(1, 10);
-            ClienteDAO clienteDAO = new ClienteDAO();
-            clienteDAO.criarCliente(cliente);
+//            Cliente cliente = new Cliente(1, 10);
+//            ClienteDAO clienteDAO = new ClienteDAO();
+//            clienteDAO.criarCliente(cliente);
 
 
             // Instanciando a classe FuncionarioDAO
@@ -47,6 +49,10 @@ public class Main {
 //            usiario.setApelido("HTR");
 //            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
 //            System.out.println( funcionarioDAO.pegarIDUsuario(usiario));
+
+
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
+            System.out.println(usuarioDAO.buscarUsuarioId(10));
 
 //            Funcionario funcionario = new Funcionario(12, "Analista");
 //            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();

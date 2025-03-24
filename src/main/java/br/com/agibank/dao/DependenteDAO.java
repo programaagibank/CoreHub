@@ -21,6 +21,15 @@ public class DependenteDAO {
         con.close();
     }
 
+    public int criarDependente(Dependente dependente) throws SQLException {
+        final String sql = "INSERT INTO Dependente (id_responsavel, id_usuario, parentesco)VALUES (?,?,?)";
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, dependente.getId_responsavel());
+        stmt.setInt(2, dependente.getId_usuario());
+        stmt.setString(3, dependente.getParentesco());
+        return stmt.executeUpdate();
+    }
+
     public Dependente buscarDependente(int id) throws SQLException {
         Dependente dependente = new Dependente();
         final String sql = "SELECT * FROM Dependente WHERE id = ?";

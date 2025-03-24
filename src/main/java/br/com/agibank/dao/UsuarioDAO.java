@@ -36,6 +36,50 @@ public class UsuarioDAO {
         return stmt.executeUpdate();
     }
 
+    public Usuario buscarUsuarioId(int id_usuario) throws SQLException {
+        Usuario usuario = new Usuario();
+        final String sql = "SELECT * FROM Usuario WHERE id_usuario = ?";
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, id_usuario);
+        rs = stmt.executeQuery();
+
+        if (rs.next()) {
+            usuario.setId(rs.getInt("id_usuario"));
+            usuario.setNome(rs.getString("nome"));
+            usuario.setApelido(rs.getString("apelido"));
+            usuario.setSenha(rs.getString("senha"));
+            usuario.setEmail(rs.getString("email"));
+            usuario.setTelefone(rs.getInt("telefone"));
+            usuario.setData_nascimento(rs.getDate("data_nascimento").toLocalDate());
+            usuario.setRua(rs.getString("rua"));
+            usuario.setNumero(rs.getInt("numero"));
+            usuario.setComplemento(rs.getString("complemento"));
+        }
+        return usuario;
+    }
+
+    public Usuario buscarUsuarioNome(String nome) throws SQLException {
+        Usuario usuario = new Usuario();
+        final String sql = "SELECT * FROM Usuario WHERE nome = ?";
+        stmt = con.prepareStatement(sql);
+        stmt.setString(1, nome);
+        rs = stmt.executeQuery();
+
+        if (rs.next()) {
+            usuario.setId(rs.getInt("id_usuario"));
+            usuario.setNome(rs.getString("nome"));
+            usuario.setApelido(rs.getString("apelido"));
+            usuario.setSenha(rs.getString("senha"));
+            usuario.setEmail(rs.getString("email"));
+            usuario.setTelefone(rs.getInt("telefone"));
+            usuario.setData_nascimento(rs.getDate("data_nascimento").toLocalDate());
+            usuario.setRua(rs.getString("rua"));
+            usuario.setNumero(rs.getInt("numero"));
+            usuario.setComplemento(rs.getString("complemento"));
+        }
+        return usuario;
+    }
+
     public int atualizarCadastroUsuario(String nome, String apelido, String senha, String email, int telefone, LocalDate data_nascimento, String rua, int numero, String complemento, int id_usuario) throws SQLException {
         final String sql = "UPDATE Usuario SET nome = ?, apelido = ?, senha = ?, email = ?, telefone = ?, data_nascimento = ?, rua = ?, numero = ?, complemento = ? WHERE id_usuario = ?";
         stmt = con.prepareStatement(sql);
