@@ -1,4 +1,4 @@
-package br.com.agibank.beans.taxa.contas;
+package br.com.agibank.beans.contas;
 
 import java.time.LocalDate;
 
