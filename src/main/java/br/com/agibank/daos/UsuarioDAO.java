@@ -1,8 +1,8 @@
 package br.com.agibank.daos;
 
-import br.com.agibank.beans.Suporte;
 import br.com.agibank.beans.Usuario;
 import br.com.agibank.beans.Conexao;
+import br.com.agibank.controller.CifradorSenha;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -24,9 +24,11 @@ public class UsuarioDAO {
         final String sql = "INSERT INTO Usuario (nome, apelido, senha, email, telefone, data_nascimento, rua, numero, complemento) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         stmt = con.prepareStatement(sql);
 
+        CifradorSenha cifradorSenha = new CifradorSenha();
+
         stmt.setString(1, usuario.getNome());
         stmt.setString(2, usuario.getApelido());
-        stmt.setString(3, usuario.getSenha());
+        stmt.setString(3, cifradorSenha.cifrarSenha(usuario.getSenha()));
         stmt.setString(4, usuario.getEmail());
         stmt.setInt(5, usuario.getTelefone());
         stmt.setDate(6, Date.valueOf(usuario.getData_nascimento()));
@@ -61,7 +63,6 @@ public class UsuarioDAO {
         stmt.executeUpdate();
     }
 
-    //TODO completar método para verificar se o usuario é cliente ou funcionario.
     public int verificarTipoUsuario(int id_usuario) throws SQLException{
         int id = 0;
         String sql = "SELECT * FROM Funcionario WHERE id_usuario = ?";
@@ -98,13 +99,12 @@ public class UsuarioDAO {
         return null;
     }
 
-    public Usuario buscarUsuarioLogin(String apelido, String senha) throws SQLException{
-        String sql = "SELECT * FROM Usuario WHERE apelido = ? and senha = ?";
+    public Usuario buscarUsuarioApelido(String apelido) throws SQLException{
+        String sql = "SELECT * FROM Usuario WHERE apelido = ?";
 
         PreparedStatement stmt = con.prepareStatement(sql);
 
         stmt.setString(1, apelido);
-        stmt.setString(2, senha);
         ResultSet rs = stmt.executeQuery();
 
         if (rs.next()) {

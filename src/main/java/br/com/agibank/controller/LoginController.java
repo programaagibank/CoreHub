@@ -8,10 +8,16 @@ import java.sql.SQLException;
 public class LoginController {
 
     public static Usuario processarLogin(String usuario, String senha) throws SQLException {
-        UsuarioDAO usuarioDao = new UsuarioDAO();
-        Usuario usuarioVerificado = usuarioDao.buscarUsuarioLogin(usuario, senha);
+        CifradorSenha cifrador = new CifradorSenha();
 
-        if( usuarioVerificado != null && usuarioVerificado.getSenha().equals(senha)) return usuarioVerificado;
+        try{
+            UsuarioDAO usuarioDao = new UsuarioDAO();
+            Usuario usuarioVerificado = usuarioDao.buscarUsuarioApelido(usuario);
+            if( usuarioVerificado != null && cifrador.validarSenhaCrifrada(usuarioVerificado.getSenha(),senha)) return usuarioVerificado;
+
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
 
         return null;
     }

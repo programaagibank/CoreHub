@@ -1,5 +1,7 @@
 package br.com.agibank.view;
 
+import br.com.agibank.controller.ClearTerminal;
+
 import javax.management.MBeanRegistration;
 import java.sql.SQLException;
 import java.sql.SQLOutput;
@@ -7,18 +9,19 @@ import java.util.Scanner;
 
 public class MenuCliente {
     public static void exibirMenuCliente(int id_usuario) throws SQLException {
+        //ClearTerminal.clearTerminal();
         Scanner sc = new Scanner(System.in);
         int interacao;
         do{
-            System.out.println("MENU CLIENTE: ");
-            System.out.println("1. VERIFICAR SALDO");
-            System.out.println("2. REALIZAR TRANSACAO");
-            System.out.println("3. SOLICITAR SUPORTE");
-            System.out.println("4. VERIFICAR BENEFICIOS");
-            System.out.println("5. MEUS DADOS");
-            System.out.println("6. VER EXTRATO");
-            System.out.println("7. DADOS DA CONTA");
-            System.out.println("8. SAIR");
+            System.out.println(CoresTerminal.getYELLOW() + "MENU CLIENTE: " + CoresTerminal.getRESET());
+            System.out.println(CoresTerminal.getBLUE() + "1. " + CoresTerminal.getRESET() + "VERIFICAR SALDO");
+            System.out.println(CoresTerminal.getBLUE() + "2. " + CoresTerminal.getRESET() + "REALIZAR TRANSACAO");
+            System.out.println(CoresTerminal.getBLUE() + "3. " + CoresTerminal.getRESET() + "SOLICITAR SUPORTE");
+            System.out.println(CoresTerminal.getBLUE() + "4. " + CoresTerminal.getRESET() + "VERIFICAR BENEFICIOS");
+            System.out.println(CoresTerminal.getBLUE() + "5. " + CoresTerminal.getRESET() + "MEUS DADOS");
+            System.out.println(CoresTerminal.getBLUE() + "6. " + CoresTerminal.getRESET() + "VER EXTRATO");
+            System.out.println(CoresTerminal.getBLUE() + "7. " + CoresTerminal.getRESET() + "DADOS DA CONTA");
+            System.out.println(CoresTerminal.getBLUE() + "8. " + CoresTerminal.getRESET() + "SAIR");
             System.out.print("-> ");
             interacao = sc.nextInt();
 
