@@ -27,7 +27,7 @@ public class MenuDadosUsuario {
     public static void exibirMenuDadosUsuario(int id_usuario) throws SQLException {
         int interacao;
         do{
-            System.out.println("QUAL E A OPERACAO DESEJADA?: ");
+            System.out.println(CoresTerminal.getYELLOW() + "QUAL E A OPERACAO DESEJADA?: " + CoresTerminal.getRESET());
             System.out.println("1. VER DADOS");
             System.out.println("2. ATUALIZAR DADOS");
             System.out.println("3. SAIR");
