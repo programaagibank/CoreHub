@@ -1,21 +1,20 @@
 package br.com.agibank.dao.conta;
 
-import br.com.agibank.beans.conta.ContaInterna;
+import br.com.agibank.beans.conta.Conta;
 import br.com.agibank.dao.Conexao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 
-public class ContaInternaDAO {
+public class ContaDAO {
 
     private Connection con;
     private PreparedStatement stmt;
     private ResultSet rs;
 
-    public ContaInternaDAO() throws SQLException {
+    public ContaDAO() throws SQLException {
         con = Conexao.getConexao();
     }
 
@@ -40,9 +39,9 @@ public class ContaInternaDAO {
     }
 
     public String buscarConta(int id) throws SQLException {
-        final String sql = "SELECT * FROM Conta WHERE id_usuario = ?";
+        final String sql = "SELECT * FROM Conta WHERE id_conta = ?";
 
-        ContaInterna contaInterna = new ContaInterna();
+        Conta conta = new Conta();
 
         stmt = con.prepareStatement(sql);
         stmt.setInt(1, id);
@@ -50,24 +49,24 @@ public class ContaInternaDAO {
 
         if(rs.next()){
 
-            contaInterna.setIdContaInterna(rs.getInt("id_conta_interna"));
-            contaInterna.setIdUsuario(rs.getInt("id_usuario"));
-            contaInterna.setIdTipo(rs.getInt("id_tipo"));
-            contaInterna.setIdClasse(rs.getDouble("id_classe"));
-            contaInterna.setIdAgencia(rs.getInt("id_agencia"));
-            contaInterna.setNumero(rs.getInt("numero"));
-            contaInterna.setSaldo(rs.getDouble("saldo"));
-            contaInterna.setDataAbertura(rs.getDate("data_abertura"));
-            contaInterna.setStatus(rs.getString("status"));
+            conta.setIdConta(rs.getInt("id_conta"));
+            conta.setIdUsuario(rs.getInt("id_usuario"));
+            conta.setIdTipo(rs.getInt("id_tipo"));
+            conta.setIdClasse(rs.getDouble("id_classe"));
+            conta.setIdAgencia(rs.getInt("id_agencia"));
+            conta.setNumero(rs.getInt("numero"));
+            conta.setSaldo(rs.getDouble("saldo"));
+            conta.setDataAbertura(rs.getDate("data_abertura"));
+            conta.setStatus(rs.getString("status"));
 
-            return contaInterna.toString();
+            return conta.toString();
 
         }else return "Deu errado";
 
     }
 
     public int atualizarConta(int numero, Double saldo, String dataAbertura, String status) throws SQLException {
-        final String sql = "UPDATE Conta SET numero = ?, saldo = ?, data_abertura = ?, status = ?  WHERE id_conta_interna = ?";
+        final String sql = "UPDATE Conta SET numero = ?, saldo = ?, data_abertura = ?, status = ?  WHERE id_conta = ?";
 
         stmt = con.prepareStatement(sql);
 
@@ -81,12 +80,33 @@ public class ContaInternaDAO {
     }
 
     public int deletarConta(int id) throws SQLException {
-        final String sql = "DELETE FROM Conta(id_conta_interna) VALUES(?)";
+        final String sql = "DELETE FROM Conta(id_conta) VALUES(?)";
 
         stmt = con.prepareStatement(sql);
 
         stmt.setInt(1, id);
 
         return stmt.executeUpdate();
+    }
+
+    public String buscarStatusConta(int id) throws SQLException {
+
+        final String sql = "SELECT * FROM Conta WHERE id_conta = ?";
+
+        Conta conta = new Conta();
+
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, id);
+        rs = stmt.executeQuery();
+
+        if(rs.next()){
+
+            conta.setStatus(rs.getString("status"));
+
+            return conta.toString();
+
+        }else return "Deu errado";
+
+
     }
 }

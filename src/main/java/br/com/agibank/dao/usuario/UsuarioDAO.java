@@ -1,9 +1,7 @@
-package br.com.agibank.daos;
+package br.com.agibank.dao.usuario;
 
-import br.com.agibank.beans.Suporte;
 import br.com.agibank.beans.Usuario;
-import br.com.agibank.beans.Conexao;
-
+import br.com.agibank.dao.Conexao;
 import java.sql.*;
 import java.time.LocalDate;
 
@@ -13,7 +11,7 @@ public class UsuarioDAO {
     private ResultSet rs;
 
     public UsuarioDAO() throws SQLException {
-        con = Conexao.getConnection();
+        con = Conexao.getConexao();
     }
 
     public void fecharConexao() throws SQLException {

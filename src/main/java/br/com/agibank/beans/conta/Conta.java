@@ -2,9 +2,9 @@ package br.com.agibank.beans.conta;
 
 import java.util.Date;
 
-public class ContaInterna {
+public class Conta {
 
-    private int idContaInterna;
+    private int idConta;
     private int idUsuario;
     private int idTipo;
     private double idClasse;
@@ -14,8 +14,8 @@ public class ContaInterna {
     private Date dataAbertura;
     private String status;
 
-    public ContaInterna(int idContaInterna, int idUsuario, int idTipo, double idClasse, int idAgencia, int numero, double saldo, Date dataAbertura, String status) {
-        this.idContaInterna = idContaInterna;
+    public Conta(int idConta, int idUsuario, int idTipo, double idClasse, int idAgencia, int numero, double saldo, Date dataAbertura, String status) {
+        this.idConta = idConta;
         this.idUsuario = idUsuario;
         this.idTipo = idTipo;
         this.idClasse = idClasse;
@@ -26,14 +26,14 @@ public class ContaInterna {
         this.status = status;
     }
 
-    public ContaInterna(){}
+    public Conta(){}
 
     public int getIdContaInterna() {
-        return idContaInterna;
+        return idConta;
     }
 
-    public void setIdContaInterna(int idContaInterna) {
-        this.idContaInterna = idContaInterna;
+    public void setIdConta(int idConta) {
+        this.idConta = idConta;
     }
 
     public int getIdUsuario() {
@@ -98,5 +98,20 @@ public class ContaInterna {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Conta{" +
+                "idConta=" + idConta +
+                ", idUsuario=" + idUsuario +
+                ", idTipo=" + idTipo +
+                ", idClasse=" + idClasse +
+                ", idAgencia=" + idAgencia +
+                ", numero=" + numero +
+                ", saldo=" + saldo +
+                ", dataAbertura=" + dataAbertura +
+                ", status='" + status + '\'' +
+                '}';
     }
 }

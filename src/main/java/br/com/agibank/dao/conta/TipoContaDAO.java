@@ -1,6 +1,5 @@
 package br.com.agibank.dao.conta;
 
-import br.com.agibank.beans.conta.Classe;
 import br.com.agibank.beans.conta.TipoConta;
 import br.com.agibank.dao.Conexao;
 
