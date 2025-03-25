@@ -1,7 +1,6 @@
 package br.com.agibank.dao.taxa;
 
-import br.com.agibank.beans.taxa.Taxa;
-import br.com.agibank.dao.Conexao;
+import br.com.agibank.beans.conta.taxa.Taxa;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,9 +17,7 @@ public class TaxaDAO {
     }
 
     public void fecharConexao() throws SQLException {
-        if (con != null && !con.isClosed()) {
-            con.close();
-        }
+        con.close();
     }
 
     public int cadastrarTaxa(int classe, String descricao, double valor) throws SQLException {
