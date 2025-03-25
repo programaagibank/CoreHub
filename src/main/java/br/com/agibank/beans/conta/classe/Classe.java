@@ -1,4 +1,4 @@
-package br.com.agibank.beans.conta;
+package br.com.agibank.beans.conta.classe;
 
 public class Classe {
 

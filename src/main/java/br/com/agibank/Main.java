@@ -1,22 +1,21 @@
 package br.com.agibank;
-import br.com.agibank.beans.Usuario;
-import br.com.agibank.controller.SuporteController;
-import br.com.agibank.controller.AgenciaController;
-import br.com.agibank.daos.UsuarioDAO;
-import br.com.agibank.view.MenuInicial;
 
 import java.sql.SQLException;
-import java.util.Scanner;
 
 import br.com.agibank.dao.conta.*;
 
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.Date;
-
 public class Main {
-    public static void main(String[] args) throws SQLException{
-        Scanner sc = new Scanner(System.in);
-        MenuInicial.exibirMenuInicial(sc);
+    public static void main(String[] args){
+
+        try{
+            ContaDAO contaDAO = new ContaDAO();
+
+            String resultado = contaDAO.buscarConta(3);
+
+            System.out.println(resultado);
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+
     }
 }

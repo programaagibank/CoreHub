@@ -1,6 +1,5 @@
 package br.com.agibank.dao.conta;
 
-import br.com.agibank.beans.conta.Beneficio;
 import br.com.agibank.beans.conta.ContaCorrente;
 import br.com.agibank.dao.Conexao;
 
