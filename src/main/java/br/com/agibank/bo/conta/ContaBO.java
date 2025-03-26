@@ -20,7 +20,7 @@ public class ContaBO {
         return contaDAO.buscarStatusConta(idConta);
     }
 
-    public Conta exibirTitularConta(int idConta) throws SQLException{
+    public String exibirTitularConta(int idConta) throws SQLException{
         return contaDAO.exibirTitularConta(idConta);
     }
 
@@ -28,5 +28,23 @@ public class ContaBO {
         return contaDAO.exibirTiposConta(idConta);
 
     }
+
+    public boolean cadastrarConta(int idUsuario, int idTipo, double idClasse, int idAgencia, int numero, double saldo, String dataAbertura) {
+        try {
+
+            if (saldo < 10) {
+                System.out.println("Erro: O saldo inicial deve ser de pelo menos R$ 10,00.");
+                return false;
+            }
+
+            int resultado = contaDAO.cadastrarConta(idUsuario, idTipo, idClasse, idAgencia, numero, saldo, dataAbertura);
+
+            return resultado > 0;
+        } catch (SQLException e) {
+            System.out.println("Erro ao cadastrar conta: " + e.getMessage());
+            return false;
+        }
+    }
+
 
 }
