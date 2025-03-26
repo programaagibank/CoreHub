@@ -1,4 +1,4 @@
-package br.com.agibank.bo.transacoes;
+package br.com.agibank.bo.conta;
 
 import br.com.agibank.beans.transacoes.ContaExterna;
 import br.com.agibank.dao.transacoes.ContaExternaDAO;

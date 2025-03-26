@@ -28,7 +28,7 @@ public class Conta {
 
     public Conta(){}
 
-    public int getIdContaInterna() {
+    public int getIdConta() {
         return idConta;
     }
 

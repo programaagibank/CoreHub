@@ -1,12 +1,14 @@
 package br.com.agibank.dao.conta;
 
 import br.com.agibank.beans.conta.Conta;
+import br.com.agibank.beans.conta.TipoConta;
 import br.com.agibank.dao.Conexao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ContaDAO {
 
@@ -106,7 +108,54 @@ public class ContaDAO {
             return conta.toString();
 
         }else return "Deu errado";
+    }
 
+    public Conta exibirTitularConta(int id) throws SQLException{
+
+        Conta conta = new Conta();
+
+        final String sql = """
+                SELECT Usuario.nome
+                FROM Conta
+                JOIN Usuario ON Conta.id_usuario = Usuario.id_usuario
+                WHERE Conta.id_conta = ?;
+                """;
+
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, id);
+        rs = stmt.executeQuery();
+
+        if(rs.next()){
+            conta.setIdConta(rs.getInt("id_conta"));
+        }
+
+        return conta;
+    }
+
+    public ArrayList<TipoConta> exibirTiposConta(int id) throws SQLException{
+
+        ArrayList<TipoConta> tiposConta = new ArrayList<>();
+        TipoConta tipoConta = new TipoConta();
+
+        final String sql = """
+                SELECT tc.tipo
+                FROM Tipo_Conta tc, Conta c
+                WHERE tc.id_tipo_conta = c.id_conta
+                AND c.id_conta = ?;
+                """;
+
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, id);
+        rs = stmt.executeQuery();
+
+        while (rs.next()) {
+
+            tipoConta.setTipo(rs.getString("tipo"));
+            tiposConta.add(tipoConta);
+        }
+
+        return tiposConta;
 
     }
+
 }
