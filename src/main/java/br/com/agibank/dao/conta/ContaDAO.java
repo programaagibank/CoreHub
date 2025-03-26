@@ -1,5 +1,6 @@
 package br.com.agibank.dao.conta;
 
+import br.com.agibank.beans.Usuario;
 import br.com.agibank.beans.conta.Conta;
 import br.com.agibank.beans.conta.TipoConta;
 import br.com.agibank.dao.Conexao;
@@ -24,18 +25,18 @@ public class ContaDAO {
         con.close();
     }
 
-    public int cadastrarConta(int idUsuario, int idTipo, double idClasse, int idAgencia, int numero, double saldo, String dataAbertura, String status) throws SQLException {
-        final String sql = "INSERT INTO Conta (id_usuario, id_tipo, id_classe, id_agencia, numero, saldo, data_abertura, status) VALUES (?,?,?,?,?,?,?,?)";
+    public int cadastrarConta(int idUsuario, int idTipo, double idClasse, int idAgencia, int numero, double saldo, String dataAbertura) throws SQLException {
+        final String sql = "INSERT INTO Conta (id_tipo, id_classe, id_agencia, numero, saldo, data_abertura, status) VALUES (?,?,?,?,?,?,?,?)";
 
         stmt = con.prepareStatement(sql);
-        stmt.setInt(1, idUsuario);
+        stmt.setInt(1, idTipo);
         stmt.setInt(2, idTipo);
         stmt.setDouble(3, idClasse);
         stmt.setInt(4, idAgencia);
         stmt.setInt(5, numero);
         stmt.setDouble(6, saldo);
         stmt.setDate(7, java.sql.Date.valueOf(dataAbertura));
-        stmt.setString(8, status);
+        stmt.setString(8, "Aguardando resposta");
 
         return stmt.executeUpdate();
     }
@@ -93,7 +94,7 @@ public class ContaDAO {
 
     public String buscarStatusConta(int id) throws SQLException {
 
-        final String sql = "SELECT * FROM Conta WHERE id_conta = ?";
+        final String sql = "SELECT status FROM Conta WHERE id_conta = ?";
 
         Conta conta = new Conta();
 
@@ -103,16 +104,13 @@ public class ContaDAO {
 
         if(rs.next()){
 
-            conta.setStatus(rs.getString("status"));
-
-            return conta.toString();
+            return rs.getString("status");
 
         }else return "Deu errado";
     }
 
-    public Conta exibirTitularConta(int id) throws SQLException{
-
-        Conta conta = new Conta();
+    public String exibirTitularConta(int id) throws SQLException{
+        Usuario usuario = new Usuario();
 
         final String sql = """
                 SELECT Usuario.nome
@@ -126,10 +124,9 @@ public class ContaDAO {
         rs = stmt.executeQuery();
 
         if(rs.next()){
-            conta.setIdConta(rs.getInt("id_conta"));
-        }
+            return rs.getString("nome");
+        }else return "titular não encontrado";
 
-        return conta;
     }
 
     public ArrayList<TipoConta> exibirTiposConta(int id) throws SQLException{

@@ -14,8 +14,7 @@ public class ContaController {
 
     public String buscarStatusConta(int idConta){
         try{
-            contaBO.buscarStatusConta(idConta);
-            return resultado;
+            resultado = contaBO.buscarStatusConta(idConta);
         }catch (SQLException e){
             resultado = "Erro: " + e.getMessage();
         }
@@ -24,8 +23,7 @@ public class ContaController {
 
     public String exibirTitularConta(int idConta){
         try{
-            resultado = "Nome do titular: " + contaBO.exibirTitularConta(idConta);
-            return resultado;
+            resultado = contaBO.exibirTitularConta(idConta);
         }catch (SQLException e){
             resultado = "Erro: " + e.getMessage();
         }
@@ -33,14 +31,15 @@ public class ContaController {
     }
 
     public String exibirTiposConta(int idConta){
-
         try{
             resultado = "Tipo da conta é: " + contaBO.exibirTiposConta(idConta);
-            return resultado;
         }catch (SQLException e){
             resultado = "Erro: " + e.getMessage();
         }
         return resultado;
 
     }
+
+
+
 }
