@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class MenuSuporte {
+    static CoresTerminal coresTerminal = new CoresTerminal();
 
     static SuporteController suporte;
     static Suporte su = new Suporte();
@@ -27,25 +28,25 @@ public class MenuSuporte {
     public static void exibirMenuSuporte(int id_usuario){
         int interacao;
         do{
-            System.out.println("QUAL E A OPERACAO DESEJADA?: ");
-            System.out.println("1. SOLICITAR AJUDA");
-            System.out.println("2. VERIFICAR RESPOSTAS");
-            System.out.println("3. SAIR");
+            System.out.println(coresTerminal.getYELLOW() + "QUAL E A OPERACAO DESEJADA?: " + CoresTerminal.getRESET());
+            System.out.println(coresTerminal.getBLUE() +"1. " + CoresTerminal.getRESET() + "SOLICITAR AJUDA");
+            System.out.println(coresTerminal.getBLUE() + "2. " + CoresTerminal.getRESET() + "VERIFICAR RESPOSTAS");
+            System.out.println(coresTerminal.getBLUE() + "3. " + CoresTerminal.getRESET() + "SAIR");
             System.out.print("-> ");
             interacao  = sc.nextInt();
             switch (interacao){
                 case 1:
-                    System.out.println("QUAL E O PROBLEMA?");
+                    System.out.println(coresTerminal.getYELLOW() + "DESCREVA O PROBLEMA:" + coresTerminal.getRESET());
                     sc.nextLine();
                     String descricao = sc.nextLine();
                     suporte.adicionarChamado(id_usuario,descricao);
                     break;
                 case 2:
-                    System.out.println("CHAMADOS REALIZADOS");
+                    System.out.println(coresTerminal.getYELLOW() + "CHAMADOS REALIZADOS" + coresTerminal.getRESET());
                     suporte.exibirChamadosPorUsuario(id_usuario);
                     break;
                 default:
-                    System.out.println("Insira uma opcao valida");
+                    System.out.println(coresTerminal.getRED() +"Insira uma opcao valida" + coresTerminal.getRESET());
             }
         }while(interacao!=3);
     }
@@ -53,7 +54,7 @@ public class MenuSuporte {
     public static void exibirMenuSuporteFuncionario(int id_usuario){
         int interacao;
         do{
-            System.out.println("QUAL E A OPERACAO DESEJADA?: ");
+            System.out.println(coresTerminal.getYELLOW() + "QUAL E A OPERACAO DESEJADA?: " + coresTerminal.getRESET());
             System.out.println("1. VERIFICAR CHAMADOS RESOLVIDOS");
             System.out.println("2. VERIFICAR CHAMADOS PENDENTES");
             System.out.println("3. ASSUMIR CHAMADO");
@@ -82,6 +83,8 @@ public class MenuSuporte {
                     System.out.println("Resolucao: ");
                     String resolucao = sc.nextLine();
                     suporte.resolverChamado(id_chamado2,resolucao,id_usuario);
+                    break;
+                case 5:
                     break;
                 default:
                     System.out.println("Insira uma opcao valida");

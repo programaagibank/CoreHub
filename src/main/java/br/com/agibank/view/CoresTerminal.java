@@ -26,4 +26,5 @@ public class CoresTerminal {
     public static String getBLUE() {
         return BLUE;
     }
+
 }

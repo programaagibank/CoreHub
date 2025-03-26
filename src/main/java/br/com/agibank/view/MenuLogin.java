@@ -19,7 +19,6 @@ public class MenuLogin {
 
         Usuario usuarioVerificado = LoginController.processarLogin(usuario,senha);
         if( usuarioVerificado!= null){
-
             System.out.println(CoresTerminal.getBLUE() + "SEJA BEM VINDO(A) " + usuarioVerificado.getApelido() + CoresTerminal.getRESET());
             if(usuarioVerificado.getFuncionario())  MenuFuncionario.exibirMenuFuncionario(usuarioVerificado.getId_Usuario());
             else  MenuCliente.exibirMenuCliente(usuarioVerificado.getId_Usuario());

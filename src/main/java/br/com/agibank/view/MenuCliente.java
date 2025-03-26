@@ -1,10 +1,6 @@
 package br.com.agibank.view;
 
-import br.com.agibank.controller.ClearTerminal;
-
-import javax.management.MBeanRegistration;
 import java.sql.SQLException;
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class MenuCliente {
