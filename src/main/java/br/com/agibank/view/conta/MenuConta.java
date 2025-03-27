@@ -3,6 +3,7 @@ package br.com.agibank.view.conta;
 import br.com.agibank.controller.conta.ContaController;
 import br.com.agibank.view.cores.CoresTerminal;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
@@ -11,8 +12,6 @@ import java.util.Scanner;
 public class MenuConta {
 
     private ContaController contaController;
-    private LocalDate dataAtual = LocalDate.now();
-    private DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
     public MenuConta() {
         try {
@@ -47,49 +46,46 @@ public class MenuConta {
                     case 1: // VER STATUS DA CONTA
                         System.out.println("O status da sua conta é: " + contaController.buscarStatusConta(idConta));
                         break;
+
                     case 2: // CRIAR MINHA CONTA
                         System.out.println("QUE TIPO DE CONTA DESEJA ABRIR? (1. POUPANÇA, 2. SALÁRIO, 3. CORRENTE)");
                         int tipoConta = sc.nextInt();
-                        sc.nextLine();
-
-                        System.out.print("Informe a classe da conta (ex: 1.0, 2.0): ");
-                        double classeConta = sc.nextDouble();
-                        sc.nextLine();
 
                         System.out.print("Informe o ID da agência: ");
                         int idAgencia = sc.nextInt();
-                        sc.nextLine();
 
                         System.out.print("Informe o número da conta: ");
                         int numeroConta = sc.nextInt();
-                        sc.nextLine();
 
                         System.out.print("Informe o saldo inicial: ");
                         double saldoInicial = sc.nextDouble();
-                        sc.nextLine();
 
-                        String dataFormatada = dataAtual.format(formato);
+                        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                        String dataFormatada = LocalDate.now().format(formato);
+
+                        int resultado = contaController.cadastrarConta(idUsuario, tipoConta, 1, idAgencia, numeroConta, saldoInicial, dataFormatada);
 
                         break;
 
-                    case 3: // DELETAR A CONTA
+                    case 3:
+                        contaController.deletarConta(idConta);
+                        System.out.println("Conta excluida com sucesso");
+                        break;
+                    case 4:
                         System.out.println("Saldo disponível: ");
                         break;
-                    case 4: // ATUALIZAR MINHA CONTA
+                    case 5:
                         System.out.println("Saldo disponível: ");
                         break;
-                    case 5: //
-                        System.out.println("Saldo disponível: ");
-                        break;
-                    case 6: // EXIBIR TITULAR DA CONTA
+                    case 6:
                         System.out.println("Titular da conta: " + contaController.exibirTitularConta(idConta));
                         break;
-                    case 7: // MOSTRAR DOCUMENTOS
+                    case 7:
                         System.out.println("Exibindo documentos...");
                         break;
-                    case 8: // EXIBIR TIPO DE CONTAS
+                    case 8:
                         System.out.println("Exibindo tipos de conta...");
-                        contaController.exibirTiposConta(idConta);
+                        System.out.println(contaController.exibirTiposConta(idConta));
                         break;
                     case 0:
                         System.out.println("Saindo...");
@@ -101,6 +97,8 @@ public class MenuConta {
                 System.out.println("Entrada inválida! Digite um número.");
                 sc.nextLine();
                 interacao = -1; // Força repetição do loop
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
         } while (interacao != 0);
 

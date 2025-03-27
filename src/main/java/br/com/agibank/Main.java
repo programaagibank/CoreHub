@@ -18,7 +18,7 @@ public class Main {
             ContaPoupancaDAO contaPoupanca = new ContaPoupancaDAO();
             TipoContaDAO tipoConta = new TipoContaDAO();
 
-
+        menuConta.exibirMenuConta(1, 1);
 
 
 
