@@ -16,6 +16,7 @@ dependencies {
     implementation("mysql:mysql-connector-java:8.0.33")
     implementation("com.github.lalyos:jfiglet:0.0.8")
     implementation("org.mindrot:jbcrypt:0.4")
+    implementation ("org.quartz-scheduler:quartz:2.3.2")
 }
 
 tasks.test {
