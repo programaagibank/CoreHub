@@ -10,7 +10,7 @@ public class Main {
 
         MenuConta menuConta = new MenuConta();
 
-
+        menuConta.exibirMenuConta(1, 1);
 
     }
 }

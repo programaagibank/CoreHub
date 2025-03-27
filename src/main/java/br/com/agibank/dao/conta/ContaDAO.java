@@ -25,11 +25,26 @@ public class ContaDAO {
         con.close();
     }
 
+    public boolean verificarContaExiste(int idAgencia, int numero, int idTipoConta) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM Conta WHERE id_agencia = ? AND numero = ?";
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, idAgencia);
+        stmt.setInt(2, numero);
+
+
+
+        rs = stmt.executeQuery();
+        if (rs.next()) {
+            return rs.getInt(1) > 0; // Se retornar um número maior que 0, a conta já existe
+        }
+        return false;
+    }
+
     public int cadastrarConta(int idUsuario, int idTipo, double idClasse, int idAgencia, int numero, double saldo, String dataAbertura) throws SQLException {
-        final String sql = "INSERT INTO Conta (id_tipo, id_classe, id_agencia, numero, saldo, data_abertura, status) VALUES (?,?,?,?,?,?,?,?)";
+        final String sql = "INSERT INTO Conta (id_usuario, id_tipo, id_classe, id_agencia, numero, saldo, data_abertura, status) VALUES (?,?,?,?,?,?,?,?)";
 
         stmt = con.prepareStatement(sql);
-        stmt.setInt(1, idTipo);
+        stmt.setInt(1, idUsuario);
         stmt.setInt(2, idTipo);
         stmt.setDouble(3, idClasse);
         stmt.setInt(4, idAgencia);
@@ -86,7 +101,6 @@ public class ContaDAO {
         final String sql = "DELETE FROM Conta(id_conta) VALUES(?)";
 
         stmt = con.prepareStatement(sql);
-
         stmt.setInt(1, id);
 
         return stmt.executeUpdate();
@@ -129,16 +143,16 @@ public class ContaDAO {
 
     }
 
-    public ArrayList<TipoConta> exibirTiposConta(int id) throws SQLException{
+    public String exibirTiposConta(int id) throws SQLException{
 
         ArrayList<TipoConta> tiposConta = new ArrayList<>();
         TipoConta tipoConta = new TipoConta();
 
         final String sql = """
-                SELECT tc.tipo
-                FROM Tipo_Conta tc, Conta c
-                WHERE tc.id_tipo_conta = c.id_conta
-                AND c.id_conta = ?;
+                SELECT Tipo_Conta.tipo
+                FROM Tipo_Conta
+                INNER JOIN Conta ON Tipo_Conta.id_tipo_conta = Conta.id_conta
+                WHERE Conta.id_conta = ?;
                 """;
 
         stmt = con.prepareStatement(sql);
@@ -151,7 +165,7 @@ public class ContaDAO {
             tiposConta.add(tipoConta);
         }
 
-        return tiposConta;
+        return tiposConta.toString();
 
     }
 
