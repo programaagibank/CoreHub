@@ -1,31 +1,18 @@
 package br.com.agibank;
 
 import br.com.agibank.dao.conta.*;
+import br.com.agibank.view.conta.MenuConta;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Date;
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) throws SQLException {
 
-        //testes e mais testes
-        try{
-            ContaInternaDAO contaInterna = new ContaInternaDAO();
-            ContaCorrenteDAO contaCorrente = new ContaCorrenteDAO();
-            ContaExternaDAO contaExterna = new ContaExternaDAO();
-            ContaSalarioDAO contaSalario = new ContaSalarioDAO();
-            ContaPoupancaDAO contaPoupanca = new ContaPoupancaDAO();
-            TipoContaDAO tipoConta = new TipoContaDAO();
+        ContaDAO contaDAO = new ContaDAO();
 
-        menuConta.exibirMenuConta(1, 1);
-
-
-
-
-        }catch (SQLException e){
-            System.out.println(e.getMessage());
-        }
+        System.out.println(contaDAO.listarContasUsuario(1));
 
     }
 }

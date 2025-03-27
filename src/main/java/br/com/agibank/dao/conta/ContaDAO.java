@@ -25,19 +25,23 @@ public class ContaDAO {
         con.close();
     }
 
-    public boolean verificarContaExiste(int idAgencia, int numero, int idTipoConta) throws SQLException {
-        String sql = "SELECT COUNT(*) FROM Conta WHERE id_agencia = ? AND numero = ?";
-        stmt = con.prepareStatement(sql);
-        stmt.setInt(1, idAgencia);
-        stmt.setInt(2, numero);
+    public boolean verificarContaExiste(int idTipo, int idAgencia, int numero) throws SQLException {
+
+            String sql = "SELECT COUNT(*) FROM Conta WHERE id_tipo = ? AND id_agencia = ? AND numero = ?";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, idTipo);
+            stmt.setInt(2, idAgencia);
+            stmt.setInt(3, numero);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0; // Se retornar um número maior que 0, significa que essa conta já existe
+            }
+
+            return false;
 
 
-
-        rs = stmt.executeQuery();
-        if (rs.next()) {
-            return rs.getInt(1) > 0; // Se retornar um número maior que 0, a conta já existe
-        }
-        return false;
     }
 
     public int cadastrarConta(int idUsuario, int idTipo, double idClasse, int idAgencia, int numero, double saldo, String dataAbertura) throws SQLException {
@@ -149,9 +153,8 @@ public class ContaDAO {
         TipoConta tipoConta = new TipoConta();
 
         final String sql = """
-                SELECT Tipo_Conta.tipo
-                FROM Tipo_Conta
-                INNER JOIN Conta ON Tipo_Conta.id_tipo_conta = Conta.id_conta
+                SELECT *
+                FROM Conta
                 WHERE Conta.id_conta = ?;
                 """;
 
@@ -168,5 +171,23 @@ public class ContaDAO {
         return tiposConta.toString();
 
     }
+
+    public ResultSet listarContasUsuario(int idUsuario) throws SQLException {
+        final String sql = """
+                SELECT c.id_conta, c.numero, tc.tipo, cl.tipo_classe, a.numero_agencia, c.saldo, c.data_abertura, c.status, c.score
+                FROM Conta c
+                INNER JOIN Tipo_Conta tc ON c.id_tipo = tc.id_tipo_conta
+                INNER JOIN Classe cl ON c.id_classe = cl.id_classe
+                INNER JOIN Agencia a ON c.id_agencia = a.id_agencia
+                WHERE c.id_usuario = ?;
+                """;
+
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, idUsuario);
+        rs = stmt.executeQuery();
+
+        return stmt.getResultSet();
+    }
+
 
 }

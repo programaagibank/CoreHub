@@ -37,7 +37,7 @@ public class ContaBO {
     public int cadastrarConta(int idUsuario, int idTipo, double idClasse, int idAgencia, int numero, double saldo, String dataAbertura) {
         try {
 
-            if (contaDAO.verificarContaExiste(idAgencia, numero, idTipo)) {
+            if (contaDAO.verificarContaExiste(idTipo, idAgencia, numero)) {
                 System.out.println("Erro: Conta já cadastrada para essa agência e número.");
                 return 0;
             }
