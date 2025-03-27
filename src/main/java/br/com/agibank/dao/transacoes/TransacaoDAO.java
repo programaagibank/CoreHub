@@ -65,4 +65,26 @@ public class TransacaoDAO {
         stmt.setInt(1, id);
         return stmt.executeUpdate();
     }
+
+    public double SomarMovimentacaoPorMes (int id_usuario) throws SQLException{
+        final String sql = "select sum(valor)  " +
+                "from Transacao tinner join Status_Transacao st on st.id_transacao = t.id_transacao where month(data) = month(now())" +
+                "and year(data) = year(now())" +
+                "and st.status = 'APROVADO'" +
+                "and (t.id_conta_destino =" +
+                "or t.id_conta_origem = ?)" +
+                "group by t.id_conta_origem";
+
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, id_usuario);
+        stmt.setInt(2,id_usuario);
+
+        rs = stmt.executeQuery();
+
+        if(rs.next()){
+            return rs.getDouble("sum(valor)");
+        }
+
+        return 0;
+    }
 }
