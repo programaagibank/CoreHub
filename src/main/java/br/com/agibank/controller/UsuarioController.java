@@ -1,14 +1,11 @@
 package br.com.agibank.controller;
-import br.com.agibank.daos.SuporteDAO;
-import br.com.agibank.daos.UsuarioDAO;
+import br.com.agibank.dao.UsuarioDAO;
 import br.com.agibank.beans.Usuario;
 import br.com.agibank.view.CoresTerminal;
 
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 
-import static java.time.temporal.TemporalQueries.localDate;
 
 public class UsuarioController {
 
@@ -43,5 +40,32 @@ public class UsuarioController {
 
         return 0;
     }
+
+    public Usuario buscarPorApelido (String apelido){
+        try{
+            return usuarioDAO.buscarUsuarioApelido(apelido);
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public int alterarDadosUsuario(int tabela, String dado, int id_usuario){
+        String[] tabelas = {"nome","email","telefone","rua","numero","complemento","apelido"};
+
+        try {
+            if(tabela == 3 || tabela == 5){
+                return usuarioDAO.atualizarCadastroUsuario(tabelas[tabela-1],Integer.parseInt(dado),id_usuario);
+            }else {
+                return usuarioDAO.atualizarCadastroUsuario(tabelas[tabela-1],dado,id_usuario);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return 0;
+    }
+
 
 }

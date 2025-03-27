@@ -1,8 +1,4 @@
 package br.com.agibank;
-import br.com.agibank.beans.Usuario;
-import br.com.agibank.controller.SuporteController;
-import br.com.agibank.controller.AgenciaController;
-import br.com.agibank.daos.UsuarioDAO;
 import br.com.agibank.view.MenuInicial;
 
 import java.sql.SQLException;

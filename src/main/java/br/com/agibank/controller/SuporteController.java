@@ -1,6 +1,5 @@
 package br.com.agibank.controller;
-import br.com.agibank.beans.Usuario;
-import br.com.agibank.daos.SuporteDAO;
+import br.com.agibank.dao.SuporteDAO;
 import br.com.agibank.beans.Suporte;
 
 import java.sql.SQLException;
@@ -19,7 +18,6 @@ public class SuporteController {
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }
-
     }
 
     public Suporte buscarChamadoPorId(int id_chamado) {

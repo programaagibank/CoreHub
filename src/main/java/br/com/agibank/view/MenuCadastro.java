@@ -1,5 +1,6 @@
 package br.com.agibank.view;
 
+import br.com.agibank.beans.Usuario;
 import br.com.agibank.controller.UsuarioController;
 
 import java.sql.SQLException;
@@ -7,7 +8,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class MenuCadastro {
-    public static void cadastro() throws SQLException {
+    public static Usuario cadastro() throws SQLException {
         Scanner sc = new Scanner(System.in);
         String nome;
         String apelido;
@@ -51,6 +52,7 @@ public class MenuCadastro {
             cadastro();
         }
 
-
+        Usuario usuario = usuarioController.buscarPorApelido(apelido);
+        return usuario;
     }
 }
