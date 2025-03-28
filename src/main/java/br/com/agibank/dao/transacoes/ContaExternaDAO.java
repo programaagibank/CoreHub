@@ -16,6 +16,7 @@ public class ContaExternaDAO {
         con = Conexao.getConexao();
     }
 
+
     public int criarContaExterna(String jsonContaExterna) throws SQLException {
         final String sql = "INSERT INTO Conta_Externa (dados_conta_externa) VALUES (?)";
         stmt = con.prepareStatement(sql);
