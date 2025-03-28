@@ -1,4 +1,4 @@
-package br.com.agibank.bo.transacoes;
+package br.com.agibank.bo.transacao;
 
 import br.com.agibank.beans.transacoes.TipoTransacao;
 import br.com.agibank.dao.transacoes.TipoTransacaoDAO;

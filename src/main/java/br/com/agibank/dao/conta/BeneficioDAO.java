@@ -1,7 +1,6 @@
 package br.com.agibank.dao.conta;
 
-import br.com.agibank.beans.conta.Beneficio;
-import br.com.agibank.beans.conta.Classe;
+import br.com.agibank.beans.conta.classe.Beneficio;
 import br.com.agibank.dao.Conexao;
 
 import java.sql.Connection;
