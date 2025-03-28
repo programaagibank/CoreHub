@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ContaDAO {
 
@@ -45,7 +46,7 @@ public class ContaDAO {
     }
 
     public int cadastrarConta(int idUsuario, int idTipo, double idClasse, int idAgencia, int numero, double saldo, String dataAbertura) throws SQLException {
-        final String sql = "INSERT INTO Conta (id_usuario, id_tipo, id_classe, id_agencia, numero, saldo, data_abertura, status) VALUES (?,?,?,?,?,?,?,?)";
+        final String sql = "INSERT INTO Conta (id_usuario, id_tipo, id_classe, id_agencia, numero, saldo, data_abertura, status, score) VALUES (?,?,?,?,?,?,?,?,?)";
 
         stmt = con.prepareStatement(sql);
         stmt.setInt(1, idUsuario);
@@ -56,6 +57,7 @@ public class ContaDAO {
         stmt.setDouble(6, saldo);
         stmt.setDate(7, java.sql.Date.valueOf(dataAbertura));
         stmt.setString(8, "Aguardando resposta");
+        stmt.setInt(8, 0);
 
         return stmt.executeUpdate();
     }
@@ -172,22 +174,45 @@ public class ContaDAO {
 
     }
 
-    public ResultSet listarContasUsuario(int idUsuario) throws SQLException {
-        final String sql = """
-                SELECT c.id_conta, c.numero, tc.tipo, cl.tipo_classe, a.numero_agencia, c.saldo, c.data_abertura, c.status, c.score
-                FROM Conta c
-                INNER JOIN Tipo_Conta tc ON c.id_tipo = tc.id_tipo_conta
-                INNER JOIN Classe cl ON c.id_classe = cl.id_classe
-                INNER JOIN Agencia a ON c.id_agencia = a.id_agencia
-                WHERE c.id_usuario = ?;
-                """;
+    public ArrayList<Conta> listarContasUsuario(int idUsuario) throws SQLException {
+        ArrayList<Conta> contas = new ArrayList<>();
+
+        String sql = """
+            SELECT c.id_conta, tc.tipo, cl.tipo_classe, a.numero_agencia, c.numero, c.saldo, c.data_abertura, c.status, c.score
+            FROM Conta c
+            INNER JOIN Tipo_Conta tc ON c.id_tipo = tc.id_tipo_conta
+            INNER JOIN Classe cl ON c.id_classe = cl.id_classe
+            INNER JOIN Agencia a ON c.id_agencia = a.id_agencia
+            WHERE c.id_usuario = ?
+            """;
 
         stmt = con.prepareStatement(sql);
         stmt.setInt(1, idUsuario);
         rs = stmt.executeQuery();
 
-        return stmt.getResultSet();
+        while (rs.next()) {
+            Conta conta = new Conta();
+
+            conta.setIdConta(rs.getInt("id_conta"));
+            conta.setTipo(rs.getString("tipo"));
+            conta.setTipoClasse(rs.getString("tipo_classe"));
+            conta.setIdAgencia(rs.getInt("numero_agencia"));
+            conta.setNumero(rs.getInt("numero"));
+            conta.setSaldo(rs.getDouble("saldo"));
+            conta.setDataAbertura(rs.getDate("data_abertura"));
+            conta.setStatus(rs.getString("status"));
+            conta.setScore(rs.getInt("score"));
+
+            contas.add(conta);
+
+        }
+
+
+
+        return contas;
     }
+
+
 
 
 }

@@ -7,26 +7,48 @@ public class Conta {
     private int idConta;
     private int idUsuario;
     private int idTipo;
+    private String tipo;
     private double idClasse;
+    private String tipoClasse;
     private int idAgencia;
     private int numero;
     private double saldo;
     private Date dataAbertura;
     private String status;
+    private int score;
 
-    public Conta(int idConta, int idUsuario, int idTipo, double idClasse, int idAgencia, int numero, double saldo, Date dataAbertura, String status) {
+    public Conta(){}
+
+    public Conta(int idConta, int idUsuario, int idTipo, String tipo, double idClasse, String tipoClasse, int idAgencia, int numero, double saldo, Date dataAbertura, String status, int score) {
         this.idConta = idConta;
         this.idUsuario = idUsuario;
         this.idTipo = idTipo;
+        this.tipo = tipo;
         this.idClasse = idClasse;
+        this.tipoClasse = tipoClasse;
         this.idAgencia = idAgencia;
         this.numero = numero;
         this.saldo = saldo;
         this.dataAbertura = dataAbertura;
         this.status = status;
+        this.score = score;
     }
 
-    public Conta(){}
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getTipoClasse() {
+        return tipoClasse;
+    }
+
+    public void setTipoClasse(String tipoClasse) {
+        this.tipoClasse = tipoClasse;
+    }
 
     public int getIdConta() {
         return idConta;
@@ -84,8 +106,8 @@ public class Conta {
         this.saldo = saldo;
     }
 
-    public java.sql.Date getDataAbertura() {
-        return (java.sql.Date) dataAbertura;
+    public Date getDataAbertura() {
+        return dataAbertura;
     }
 
     public void setDataAbertura(Date dataAbertura) {
@@ -100,18 +122,43 @@ public class Conta {
         this.status = status;
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     @Override
     public String toString() {
         return "Conta{" +
-                "idConta=" + idConta +
-                ", idUsuario=" + idUsuario +
-                ", idTipo=" + idTipo +
-                ", idClasse=" + idClasse +
-                ", idAgencia=" + idAgencia +
-                ", numero=" + numero +
-                ", saldo=" + saldo +
-                ", dataAbertura=" + dataAbertura +
-                ", status='" + status + '\'' +
-                '}';
+               "idConta=" + idConta +
+               ", idUsuario=" + idUsuario +
+               ", idTipo=" + idTipo +
+               ", idClasse=" + idClasse +
+               ", idAgencia=" + idAgencia +
+               ", numero=" + numero +
+               ", saldo=" + saldo +
+               ", dataAbertura=" + dataAbertura +
+               ", status='" + status + '\'' +
+               ", score=" + score +
+               '}';
+    }
+
+    
+    public String conta(){
+        return "Conta{" +
+               "idConta=" + idConta +
+               ", idUsuario=" + idUsuario +
+               ", idTipo=" + idTipo +
+               ", idClasse=" + idClasse +
+               ", idAgencia=" + idAgencia +
+               ", numero=" + numero +
+               ", saldo=" + saldo +
+               ", dataAbertura=" + dataAbertura +
+               ", status='" + status + '\'' +
+               ", score=" + score +
+               '}';
     }
 }
