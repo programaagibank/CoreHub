@@ -1,7 +1,9 @@
 package br.com.agibank.controller;
 
 import br.com.agibank.beans.Agencia;
-import br.com.agibank.dao.agencia.AgenciaDAO;
+
+import br.com.agibank.dao.AgenciaDAO;
+
 
 import java.sql.SQLException;
 
