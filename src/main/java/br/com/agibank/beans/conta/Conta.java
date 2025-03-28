@@ -7,10 +7,11 @@ public class Conta {
     private int idConta;
     private int idUsuario;
     private int idTipo;
-    private String tipo;
     private double idClasse;
-    private String tipoClasse;
     private int idAgencia;
+    private String tipo;
+    private String tipoClasse;
+    private int numeroAgencia;
     private int numero;
     private double saldo;
     private Date dataAbertura;
@@ -19,19 +20,28 @@ public class Conta {
 
     public Conta(){}
 
-    public Conta(int idConta, int idUsuario, int idTipo, String tipo, double idClasse, String tipoClasse, int idAgencia, int numero, double saldo, Date dataAbertura, String status, int score) {
+    public Conta(int idConta, int idUsuario, int idTipo, double idClasse, int idAgencia, String tipo, String tipoClasse, int numeroAgencia, int numero, double saldo, Date dataAbertura, String status, int score) {
         this.idConta = idConta;
         this.idUsuario = idUsuario;
         this.idTipo = idTipo;
-        this.tipo = tipo;
         this.idClasse = idClasse;
-        this.tipoClasse = tipoClasse;
         this.idAgencia = idAgencia;
+        this.tipo = tipo;
+        this.tipoClasse = tipoClasse;
+        this.numeroAgencia = numeroAgencia;
         this.numero = numero;
         this.saldo = saldo;
         this.dataAbertura = dataAbertura;
         this.status = status;
         this.score = score;
+    }
+
+    public int getNumeroAgencia() {
+        return numeroAgencia;
+    }
+
+    public void setNumeroAgencia(int numeroAgencia) {
+        this.numeroAgencia = numeroAgencia;
     }
 
     public String getTipo() {
@@ -138,22 +148,9 @@ public class Conta {
                ", idTipo=" + idTipo +
                ", idClasse=" + idClasse +
                ", idAgencia=" + idAgencia +
-               ", numero=" + numero +
-               ", saldo=" + saldo +
-               ", dataAbertura=" + dataAbertura +
-               ", status='" + status + '\'' +
-               ", score=" + score +
-               '}';
-    }
-
-    
-    public String conta(){
-        return "Conta{" +
-               "idConta=" + idConta +
-               ", idUsuario=" + idUsuario +
-               ", idTipo=" + idTipo +
-               ", idClasse=" + idClasse +
-               ", idAgencia=" + idAgencia +
+                ", tipoConta=" + tipo +
+                ", tipoClasse=" + tipoClasse +
+                ", numeroAgencia=" + numeroAgencia +
                ", numero=" + numero +
                ", saldo=" + saldo +
                ", dataAbertura=" + dataAbertura +

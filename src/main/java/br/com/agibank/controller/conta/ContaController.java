@@ -2,12 +2,14 @@ package br.com.agibank.controller.conta;
 
 import br.com.agibank.beans.conta.TipoConta;
 import br.com.agibank.bo.conta.ContaBO;
+import br.com.agibank.dao.conta.ContaDAO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ContaController {
 
+    private final ContaDAO contaDAO = new ContaDAO();
     private final ContaBO contaBO = new ContaBO();
     private String resultado;
 
@@ -48,5 +50,16 @@ public class ContaController {
         contaBO.deletarConta(idConta);
         return 1;
     }
+
+    public int tratamento(int idUsuario) throws SQLException {
+        contaDAO.listarContasUsuario(idUsuario);
+        return 1;
+    }
+
+    public int listarContaUsuario(int idUsuario) throws SQLException {
+        tratamento(idUsuario);
+        return 1;
+    }
+
 
 }

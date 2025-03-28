@@ -196,7 +196,7 @@ public class ContaDAO {
             conta.setIdConta(rs.getInt("id_conta"));
             conta.setTipo(rs.getString("tipo"));
             conta.setTipoClasse(rs.getString("tipo_classe"));
-            conta.setIdAgencia(rs.getInt("numero_agencia"));
+            conta.setNumeroAgencia(rs.getInt("numero_agencia"));
             conta.setNumero(rs.getInt("numero"));
             conta.setSaldo(rs.getDouble("saldo"));
             conta.setDataAbertura(rs.getDate("data_abertura"));
@@ -206,9 +206,6 @@ public class ContaDAO {
             contas.add(conta);
 
         }
-
-
-
         return contas;
     }
 
